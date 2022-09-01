@@ -1,0 +1,35 @@
+<div class="card" style="width: 100%; text-align: center;">
+  <img
+    routerLink="detail/{{ product.id }}"
+    src="{{ product.thumbnail }}"
+    class="card-img-top"
+    title="Read More... "
+    style="width: 100%; height: 150px; cursor: pointer;"
+    alt="..."
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title }}</h5>
+    <p class="card-text">
+      <span><strong>price:</strong></span>
+      {{ product.price | currency }}
+    </p>
+    <select
+      class="form-select form-select-sm mx-auto mb-2 w-50"
+      aria-label=".form-select-sm example"
+      [(ngModel)]="selectedAmount"
+      (click)="getAmountPro()"
+    >
+      <option *ngFor="let i of productQuantity" value="{{ i }}">{{ i }}</option>
+    </select>
+    <div class="d-flex justify-content-around">
+      <button
+        [disabled]="selectedAmount < 1"
+        type="button"
+        (click)="getProId(product.id)"
+        class="btn btn-primary"
+      >
+        Add to cart
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-around">
+  <div style="width: 48%; height: 100vh;">
+    <img
+      #mainImg
+      class="w-100 h-75 mb-3"
+      style="background-size: cover;"
+      src="{{ singleProduct.thumbnail }}"
+    />
+    <div class="d-flex flex-nowrap w-100 justify-content-between">
+      <img
+        class="prodImgs"
+        style="background-size: cover; width: 23%; height: 150px;"
+        *ngFor="let img of images; let i = index"
+        src="{{ img }}"
+        (click)="viewPic(img, i)"
+        alt=""
+      />
+    </div>
+  </div>
+  <div style="width: 48%;">
+    <p class="col-1"><span>Name:</span></p>
+    <p class="offset-1">
+      {{ singleProduct.title }}
+    </p>
+    <p class="col-1"><span>Price:</span></p>
+    <p class="offset-1">
+      {{ singleProduct.price | currency }}
+    </p>
+    <p class="col-1">Rating:</p>
+    <p class="offset-1">
+      {{ singleProduct.rating }}
+      <fa-icon style="color: #ffb300;" [icon]="faStar"></fa-icon>
+    </p>
+    <p class="col-1"><span>Description:</span></p>
+    <p class="offset-1">
+      {{ singleProduct.description }}
+    </p>
+
+    <select
+      class="form-select form-select-sm"
+      aria-label=".form-select-sm example"
+      [(ngModel)]="selectedAmount"
+    >
+      <option *ngFor="let i of productQuantity" value="{{ i }}">{{ i }}</option>
+    </select>
+    <button
+      [disabled]="selectedAmount < '1'"
+      type="button"
+      (click)="getSelectedAmount()"
+      class="btn btn-primary my-3"
+    >
+      Add to cart
+    </button>
+    <a routerLink="" class="d-block">Back to product list</a>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="d-flex flex-wrap justify-content-around">
+  <app-product-detail
+    class="my-3"
+    *ngFor="let p of product"
+    [product]="p"
+    style="width: 23%;"
+    (prodcCart)="addProduct($event)"
+    (cartAmount)="addAmount($event)"
+  ></app-product-detail>
+</div>

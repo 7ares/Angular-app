@@ -1,0 +1,90 @@
+<div *ngIf="cartList.length > 0" class="d-flex justify-content-around">
+  <div class="d-flex flex-column" style="width: 48%;">
+    <div
+      *ngFor="let pro of cartList; let i = index"
+      class="d-flex justify-content-center mt-5 align-items-center"
+    >
+      <img
+        style="
+          width: 150px;
+          height: 200px;
+          margin-right: 20px;
+          border-radius: 10px;
+        "
+        src="{{ pro.thumbnail }}"
+      />
+      <div class="d-flex flex-column align-items-center">
+        <p class="mb-3">{{ pro.title }}</p>
+        <p class="mb-3">{{ pro.price | currency }}</p>
+        <p class="mb-3">Amount: {{ pro.amount }}</p>
+        <fa-icon
+          [icon]="deleteIcon"
+          class="btn-primary"
+          (click)="deleteItem(i)"
+        ></fa-icon>
+      </div>
+    </div>
+    <h4>Total:{{ price | currency }}</h4>
+  </div>
+
+  <form
+    #form="ngForm"
+    (ngSubmit)="onSubmit()"
+    class="d-flex flex-column"
+    style="width: 48%; margin-top: 30px;"
+  >
+    <div style="width: 90%;">
+      <label>User Name</label>
+      <input
+        class="mb-3"
+        style="width: 100%;"
+        minlength="3"
+        type="text"
+        name="userName"
+        placeholder="minimum character 3"
+        required
+        [(ngModel)]="userName"
+      />
+    </div>
+
+    <div style="width: 90%;">
+      <label>User Address</label>
+      <input
+        class="mb-3"
+        style="width: 100%;"
+        minlength="6"
+        type="text"
+        name="adress"
+        placeholder="minimum character 6"
+        required
+      />
+    </div>
+    <div style="width: 90%;">
+      <label>Credit Card</label>
+      <input
+        class="mb-3"
+        style="width: 100%;"
+        minlength="16"
+        type="number"
+        required
+        name="credit"
+        placeholder="(16-digits number)"
+      />
+    </div>
+    <button
+      routerLink="/order"
+      type="submit"
+      (click)="onSubmit()"
+      class="btn btn-primary w-25"
+      [disabled]="!form.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+<div
+  *ngIf="cartList.length == 0"
+  class="w-100 h-100 d-flex align-items-center justify-content-center"
+>
+  <p class="fs-3">Sorry Your Cart Is Empty</p>
+</div>
