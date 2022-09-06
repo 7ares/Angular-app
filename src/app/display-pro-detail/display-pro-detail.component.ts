@@ -5,7 +5,7 @@ import {
   ElementRef,
   Renderer2,
 } from '@angular/core'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faStar,faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { ProductServerService } from '../services/product-server.service'
@@ -26,6 +26,8 @@ export class DisplayProDetailComponent implements OnInit {
   productQuantity: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   // get icon from fontawesome
   faStar = faStar
+  ischecked = faCheckCircle ;
+  isProChecked : boolean = false ;
 
   // change main pic of pro and present another that user clicked on
   viewPic(src: string, index: number) {
@@ -68,7 +70,28 @@ export class DisplayProDetailComponent implements OnInit {
 
   // ad pro with it's amount to cartList
   getSelectedAmount() {
-    this.singleProduct.amount = parseInt(this.selectedAmount)
-    this.cartService.productData.push(this.singleProduct)
-  }
+    let pro =this.singleProduct ;
+    let proAmount = parseInt(this.selectedAmount) ; 
+    let isExist = false ;
+    this.isProChecked = true;
+    
+    this.cartService.productData.filter(function(x){
+      if(pro.id == x.id){
+        x.amount += proAmount
+        isExist = true ;
+        console.log("update")
+        }
+        
+    })
+
+   if(!isExist){
+    pro.amount = proAmount ;
+    this.cartService.productData.push(this.singleProduct);
+    
+    console.log("push")
+   }
+
+    
+   console.log(isExist)
+}
 }

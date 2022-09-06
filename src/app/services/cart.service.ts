@@ -7,14 +7,13 @@ import { Injectable } from '@angular/core';
 
 export class CartService {
   productData: any[] = [] ;
-userData: any[] = [] ;
+userName: string = "";
+totalPrice:number =0;
 
 clearData(){
 this.productData = [] ;
 }
 
-clearUserData(){
-  this.userData= [] ;
-}
+
 
 }

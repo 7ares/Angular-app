@@ -10,15 +10,15 @@ export class UserOrderComponent implements OnInit {
   userName: string = ''
   orderPrice: number = 0
 
-  userinfo: any[] = []
+ 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.userinfo = this.cartService.userData
+    this.userName = this.cartService.userName
 
-    this.userName = this.userinfo[0]
-    this.orderPrice = this.userinfo[1]
+   
+    this.orderPrice = this.cartService.totalPrice
 
-    this.cartService.clearUserData()
+   
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { CartService } from '../services/cart.service'
 import {  Subscription } from 'rxjs'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash , faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+
 
 
 @Component({
@@ -13,7 +14,10 @@ export class ProCartComponent implements OnInit {
   cartList: any[] = []
   price: number = 0
   userName: string = ''
+  address: string = ''
+  userCard:number = 0
   deleteIcon = faTrash ;
+  xMark = faCircleXmark;
 
   userData: any[] = []
 
@@ -37,10 +41,16 @@ export class ProCartComponent implements OnInit {
   onSubmit() {
     this.cartService.clearData()
 
-    this.cartService.userData.push(this.userName, this.price)
+    this.cartService.userName = this.userName
+    this.cartService.totalPrice =this.price ;
   }
   deleteItem(i:number){
     this.cartList.splice(i,1);
     this.getTotalPrice();
+    window.alert("The Product successfully delelted")
+  }
+
+  onUserNameChange(value:string){
+    this.userName = value ;
   }
 }

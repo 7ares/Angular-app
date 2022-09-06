@@ -33,43 +33,88 @@
     class="d-flex flex-column"
     style="width: 48%; margin-top: 30px;"
   >
-    <div style="width: 90%;">
-      <label>User Name</label>
-      <input
-        class="mb-3"
-        style="width: 100%;"
-        minlength="3"
-        type="text"
-        name="userName"
-        placeholder="minimum character 3"
-        required
-        [(ngModel)]="userName"
-      />
-    </div>
+  <div style="width: 90%;">
+    <label>User Name</label>
+    <input
+      class="mb-3"
+      style="width: 100%;"
+      minlength="3"
+      type="text"
+      name="userName"
+      placeholder="minimum character 3"
+      required
+      [(ngModel)]="userName"
+      #name="ngModel"
+      (ngModelChange)="onUserNameChange($event)"/>
+      <div  *ngIf="name.invalid && (name.dirty || name.touched)"
+  class="alert m-0 mb-3 p-0">
 
-    <div style="width: 90%;">
-      <label>User Address</label>
-      <input
-        class="mb-3"
-        style="width: 100%;"
-        minlength="6"
-        type="text"
-        name="adress"
-        placeholder="minimum character 6"
-        required
-      />
+<div *ngIf="name.errors?.['required']" style="color:red;">
+  <fa-icon [icon]="xMark" style="color: red;"></fa-icon> Name is required.
+</div>
+<div *ngIf="name.errors?.['minlength']">
+  Name must be at least 4 characters long.
+</div>
+  </div>
+  </div>
+
+    
+  <div style="width: 90%;">
+    <label>User Address</label>
+    <input
+      class="mb-3"
+      style="width: 100%;"
+      minlength="6"
+      type="text"
+      name="adress"
+      placeholder="minimum character 6"
+      required
+      [(ngModel)] = "address"
+      #useraddress="ngModel"
+     
+    />
+  
+    <div  *ngIf="useraddress.invalid && (useraddress.dirty || useraddress.touched)"
+    class="alert m-0 mb-3 p-0">
+
+  <div *ngIf="useraddress.errors?.['required']" style="color:red;">
+    <fa-icon [icon]="xMark" style="color: red;"></fa-icon> adress is required.
+  </div>
+  <div *ngIf="useraddress.errors?.['minlength']">
+    <fa-icon [icon]="xMark" style="color: red;"></fa-icon> Name must be at least 6 characters long.
+  </div>
     </div>
+   
+  </div>
+
+   
+
     <div style="width: 90%;">
       <label>Credit Card</label>
       <input
         class="mb-3"
         style="width: 100%;"
-        minlength="16"
+        pattern=".{16,16}"
+        
+       minlength="16"
         type="number"
         required
         name="credit"
         placeholder="(16-digits number)"
-      />
+        [(ngModel)]="userCard"
+        #card="ngModel"
+       />
+       <div  *ngIf="card.invalid && (card.dirty || card.touched)"
+    class="alert m-0 mb-3 p-0">
+
+  <div *ngIf="card.errors?.['required']" style="color:red;">
+    <fa-icon [icon]="xMark" style="color: red;"></fa-icon> card number is required.
+  </div>
+  <div *ngIf="card.errors?.['pattern']">
+    <fa-icon [icon]="xMark" style="color: red;"></fa-icon> card must be at least 16 numbers long.
+  </div>
+    </div>
+       
     </div>
     <button
       routerLink="/order"

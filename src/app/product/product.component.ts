@@ -30,11 +30,37 @@ export class ProductComponent implements OnInit {
     this.SingleProduct = this.product.filter(function (i: productDetail) {
       return i.id === id
     })
-    this.SingleProduct[0].amount = this.amount
-    this.cartService.productData.push(this.SingleProduct[0])
+
+    let pro =this.SingleProduct[0] ;
+
+    let proAmount: number  = this.amount; 
+    if(typeof(this.amount) == "string"){
+      proAmount = parseInt(this.amount);  
+    }
+
+    let isExist = false ;
+
+   
+    this.cartService.productData.filter(function(x){
+      if(pro.id == x.id){
+       let a = parseInt(x.amount);
+       
+       x.amount = a + proAmount ;
+       isExist = true ;
+    }
+   
+  
+       
+    })
+if(!isExist){
+  this.SingleProduct[0].amount = this.amount
+  this.cartService.productData.push(this.SingleProduct[0])
+}
+   
   }
 
   addAmount(x: number) {
     this.amount = x
+    console.log("type", typeof(this.amount))
   }
 }

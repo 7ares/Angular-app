@@ -1,12 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { Router } from '@angular/router'
 import { productDetail } from '../models/productDetail'
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css'],
 })
 export class ProductDetailComponent implements OnInit {
+  ischecked = faCircleCheck ;
+  isProChecked = false ;
   @Input() product: any
 
   selectedAmount: number = 0
@@ -22,6 +25,7 @@ export class ProductDetailComponent implements OnInit {
 
   getProId(id: number) {
     this.prodcCart.emit(id)
+    this.isProChecked = true
   }
   getAmountPro() {
     this.cartAmount.emit(this.selectedAmount)

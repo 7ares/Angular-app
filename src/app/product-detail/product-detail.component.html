@@ -14,19 +14,20 @@
       {{ product.price | currency }}
     </p>
     <select
-      class="form-select form-select-sm mx-auto mb-2 w-50"
+      class="form-select form-select-sm mx-auto mb-2 w-50 d-inline"
       aria-label=".form-select-sm example"
       [(ngModel)]="selectedAmount"
       (click)="getAmountPro()"
     >
-      <option *ngFor="let i of productQuantity" value="{{ i }}">{{ i }}</option>
+      <option *ngFor="let i of productQuantity" value="{{i}}">{{ i }}</option>
     </select>
+    <fa-icon *ngIf="isProChecked" [icon]="ischecked" style="font-size:24px ; color:green; margin-left: 5px;"></fa-icon>
     <div class="d-flex justify-content-around">
       <button
         [disabled]="selectedAmount < 1"
         type="button"
         (click)="getProId(product.id)"
-        class="btn btn-primary"
+        class="btn btn-primary d-block"
       >
         Add to cart
       </button>
